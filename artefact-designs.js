@@ -54,7 +54,7 @@
       <g data-axis-icon="moon" role="img" aria-label="Night" transform="translate(869 862)" fill="${ink}"><path d="M12 -17C-3 -20 -21 -6 -16 9C-11 23 8 24 18 9C5 10 -3 -3 12 -17Z"/></g>
     </g>`;
   }
-  function scoreMeter(data, variant) {
+  function scoreMeter(data, variant, comparison) {
     const score = Math.max(0, Math.min(100, Number(data.rhythmDisplay)));
     const count = 28, filled = Math.round(score / 100 * count);
     const bars = Array.from({ length: count }, (_, i) => {
@@ -76,7 +76,7 @@
       </g>
       ${bars}
       <text class="meter-score" x="580" y="784.08" text-anchor="middle" letter-spacing="-4" fill="${variant.scoreInk}"><tspan class="meter-value" font-size="112">${escape(data.rhythmDisplay)}</tspan></text>
-      <text class="percentile-caption meter-percentile" data-percentile="mock" x="580" y="961" text-anchor="middle" font-size="32.256"><tspan x="580">Better rhythm than</tspan><tspan x="580" dy="42">99.2% of people</tspan></text>
+      <text class="percentile-caption meter-percentile" data-percentile="mock" x="580" y="961" text-anchor="middle" font-size="32.256">${comparison.label ? `<tspan x="580">${escape(comparison.label)}</tspan><tspan x="580" dy="42">${escape(comparison.value)}</tspan>` : `<tspan x="580">${escape(comparison.value)}</tspan>`}</text>
     </g>`;
   }
   function approvalPapers(variant) {
@@ -96,12 +96,14 @@
   function render(data, options = {}) {
     const variant = variants.find(v => v.key === (options.variant || data.archetype)) || variants[0];
     const meter = options.treatment === 'meter';
+    const hasFigure = Number.isFinite(options.figurePercent) && options.figurePercent >= 0 && options.figurePercent <= 100;
+    const comparison = hasFigure ? {label:'',value:n(options.figurePercent)+'%'} : {label:'Better rhythm than',value:'99.2% of people'};
     const id = 'trace-' + variant.key + (meter ? '-meter' : '');
     const background = options.backgroundData || `assets/artefacts/cinema/${variant.key}-paper.png`;
     const date = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC' }).format(new Date(data.date + 'T00:00:00Z'));
     return `<svg xmlns="http://www.w3.org/2000/svg" width="1086" height="1448" viewBox="0 0 1086 1448" role="img" aria-labelledby="${id}-title ${id}-desc" data-archetype="${variant.key}" data-treatment="${meter ? 'meter' : 'rhythm'}" data-report-date="${escape(data.date)}" data-detail-scale="1.2">
   <title id="${id}-title">${escape(variant.title)} — Trace</title>
-  <desc id="${id}-desc">${escape(variant.caption)} ${escape(date)}. Rhythm score ${escape(data.rhythmDisplay)} out of 100 from the illustrative report model. Percentile copy is a fixed design placeholder, not a calculated population comparison. The Cortisol Gods approve. Playful editorial approval and playful director credit, not a medical classification. Transparent story overlay.</desc>
+  <desc id="${id}-desc">${escape(variant.caption)} ${escape(date)}. Rhythm score ${escape(data.rhythmDisplay)} out of 100 from the illustrative report model. ${hasFigure ? 'Share graphic value '+escape(comparison.value)+', supplied independently of the rhythm score.' : 'Percentile copy is a fixed design placeholder, not a calculated population comparison.'} The Cortisol Gods approve. Playful editorial approval and playful director credit, not a medical classification. Transparent story overlay.</desc>
   <defs><style>${options.fontStyle || ''}
     text{font-synthesis:none}
     .type{font-family:'GT Alpina Typewriter',monospace;font-weight:400}
@@ -124,14 +126,14 @@
       <text class="heading" x="182" y="${320 + i * 105}" font-size="112" letter-spacing="-3">${escape(line)}</text>`).join('')}
     </g>
     <text class="mono-credit director" x="188" y="522" font-size="36">DIR. BY ${escape(variant.director)}</text>
-    ${meter ? scoreMeter(data, variant) : `<g data-rhythm-composition="true" transform="translate(-46 96)">
+    ${meter ? scoreMeter(data, variant, comparison) : `<g data-rhythm-composition="true" transform="translate(-46 96)">
       <g data-rhythm-plot="true" transform="translate(0 140)">
         ${sketchedRhythm(data, variants.indexOf(variant) + 1, variant.badgePaper)}
         ${rhythmAxisIcons(variant.badgePaper)}
       </g>
       <g data-rhythm-score-block="true" aria-label="Rhythm score ${escape(data.rhythmDisplay)} out of 100">
         <text class="score-value" data-score="rhythm" x="929" y="610" text-anchor="end" font-size="112" letter-spacing="-4" fill="${variant.scoreInk}" stroke="#FFF7EA" stroke-width="5.6" stroke-linejoin="round" paint-order="stroke fill"><tspan class="rhythm-score-value">${escape(data.rhythmDisplay)}</tspan><tspan class="rhythm-score-total" font-size="42" dx="8" letter-spacing="-2" stroke="none">/100</tspan></text>
-        <text class="percentile-caption rhythm-percentile" data-percentile="mock" x="929" y="678" text-anchor="end" font-size="32.256"><tspan x="929">Better rhythm than</tspan><tspan x="929" dy="42">99.2% of people</tspan></text>
+        <text class="percentile-caption rhythm-percentile" data-percentile="mock" x="929" y="678" text-anchor="end" font-size="32.256">${comparison.label ? `<tspan x="929">${escape(comparison.label)}</tspan><tspan x="929" dy="42">${escape(comparison.value)}</tspan>` : `<tspan x="929">${escape(comparison.value)}</tspan>`}</text>
       </g>
     </g>`}
     <g data-approval-block="true" data-anchor="footer-baseline" transform="translate(0 204.6)">

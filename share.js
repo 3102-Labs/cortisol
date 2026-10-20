@@ -52,6 +52,7 @@
     ]);
     const svg = designs.render(snapshot, {
       treatment,
+      figurePercent: window.TraceReportOptions?.share?.figurePercent,
       fontStyle: window.TraceArtefactFonts,
       backgroundData: window.TraceArtefactPapers[variant.key]
     });

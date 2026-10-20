@@ -1,0 +1,30 @@
+@font-face{font-family:Trace Rhythm Icons;src:url('fonts/MaterialSymbolsOutlined-RhythmTimes.ttf') format('truetype');font-weight:300;font-style:normal;font-display:block}
+/* Cortisol rhythm only. The approved characteristics remain independent. */
+#curve-screen{animation:none}
+#curve-screen h1{margin-bottom:12px}
+#curve-screen .curve-intro{margin:0;max-width:290px;font-size:15px;line-height:1.6;color:#665c69}
+#curve-screen .rhythm-curve-card{margin:26px 0 0;padding:18px 18px 20px;border:0;border-radius:22px;background:var(--card);box-shadow:none}
+#curve-screen .curve-space{margin:0;min-height:0;display:block}
+#curve-screen .curve-chart{height:222px;width:100%;display:block;overflow:visible}
+#curve-screen .curve-chart .reading{font-family:var(--font-numeric);font-size:26px;letter-spacing:-.06em;fill:#302333}
+#curve-screen .curve-chart .phase{font-family:var(--font-ui);font-size:11px;fill:var(--reference-label)}
+#curve-screen .curve-unit{font-family:var(--font-mono);font-weight:400;margin:12px 0 0;font-size:10px;line-height:1.4;color:var(--reference-label);text-align:right}
+@media(max-width:350px){#curve-screen .rhythm-curve-card{padding:16px 14px 18px;margin-top:22px}#curve-screen .curve-intro{font-size:14px}#curve-screen .curve-chart .reading{font-size:24px}}
+
+#curve-screen .curve-chart .time-icon{font-family:Trace Rhythm Icons;font-size:14px;font-weight:300;font-style:normal;letter-spacing:normal;font-feature-settings:"liga";fill:#716675}
+
+#curve-screen .curve-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:10px;line-height:1.4;color:var(--reference-label)}
+#curve-screen .curve-footer .curve-unit{margin:0}
+#curve-screen .curve-range-key{display:inline-flex;align-items:center;gap:6px;color:var(--reference-label)}
+#curve-screen .curve-range-key i{display:inline-block;width:18px;height:9px;border:1px dashed #b7afa6;border-radius:3px;background:repeating-linear-gradient(135deg,#d3cec7 0 1px,#f5f3f0 1px 4px)}
+
+#curve-screen .curve-readings-header{display:flex;justify-content:space-between;gap:8px;margin-bottom:30px;color:var(--reference-label);font-size:10px;line-height:1.4}
+#curve-screen .curve-readings-header>span:first-child{color:#6f6471}
+#curve-screen .curve-readings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 12px;gap:0}
+#curve-screen .curve-readings>div{min-width:0;padding-left:14px;border-left:1px solid var(--card-divider)}
+#curve-screen .curve-readings>div:first-child{padding-left:0;border-left:0}
+#curve-screen .curve-readings dt{display:flex;align-items:center;gap:5px;color:var(--reference-label);font-size:10px;white-space:nowrap}
+#curve-screen .reading-time-icon{font-family:Trace Rhythm Icons;font-size:15px;font-weight:300;line-height:1;letter-spacing:normal;font-feature-settings:"liga"}
+#curve-screen .curve-readings dd{font-family:var(--font-numeric);font-size:30px;font-weight:400;line-height:1.15;letter-spacing:-.06em;margin:8px 0 0;color:#302333;overflow-wrap:anywhere}
+#curve-screen .curve-footer{border-top:1px solid var(--card-divider);padding-top:14px;margin-top:4px;font-size:10px}
+@media(max-width:350px){#curve-screen .curve-readings>div{padding-left:9px}#curve-screen .curve-readings>div:first-child{padding-left:0}#curve-screen .curve-readings dt{gap:3px;font-size:9px}#curve-screen .curve-readings dd{font-size:27px}#curve-screen .curve-footer{gap:6px}}

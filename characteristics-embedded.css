@@ -1,0 +1,55 @@
+@import url('illustration-treatment.css');
+@import url('time-icons.css');
+@font-face{font-family:Material Symbols Outlined;src:url('fonts/MaterialSymbolsOutlined-Bedtime.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+
+/* Card styling is scoped so the welcome, curve, scores and editor keep their layout. */
+#characteristics-screen{--ink:#302a33;--muted:#665c69;--trace-model-opacity:.94;color:var(--ink);font-size:15px;line-height:1.6;animation:none}
+#characteristics-screen>h1{font-size:32px;margin:14px 0 36px}
+#characteristics-screen .characteristic{padding:0;margin:0 0 60px;border:0}
+#characteristics-screen .characteristic:first-child{padding-top:0;border-top:0}
+#characteristics-screen h2{font-size:24.8px;line-height:1.2;letter-spacing:-.025em;margin:0 0 14px}
+#characteristics-screen .description{font-size:15px;line-height:1.7;color:#625768;margin:0 0 18px}
+/* Match the soft navigation controls and charcoal primary actions. */
+#characteristics-screen .info-title{position:relative;display:flex;align-items:center;gap:12px;min-height:32px;margin:0 0 16px}
+#characteristics-screen .info-title h2{flex:1;min-width:0;margin:0}
+#characteristics-screen .info-btn{position:relative;isolation:isolate;flex:none;display:grid;place-items:center;width:44px;height:44px;margin:-6px -6px -6px 0;padding:0;border:0;border-radius:16px;background:transparent;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#characteristics-screen .info-btn::before{content:"";position:absolute;z-index:-1;inset:6px;border-radius:12px;background:#ebe8e2;transition:background .15s ease}
+#characteristics-screen .info-btn svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+#characteristics-screen .info-btn .info-dot{fill:currentColor;stroke:none}
+#characteristics-screen .info-btn:hover::before{background:#e1ddd7}
+#characteristics-screen .info-btn[aria-expanded="true"]{color:var(--paper)}
+#characteristics-screen .info-btn[aria-expanded="true"]::before{background:var(--ink)}
+#characteristics-screen .info-btn:focus-visible{outline:2px solid #8c6dae;outline-offset:0}
+#characteristics-screen .info-pop{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 10px);padding:18px;border:0;border-radius:16px;background:var(--ink);box-shadow:none;color:var(--paper);font:400 14px/1.65 var(--font-ui);letter-spacing:0;text-wrap:pretty}
+#characteristics-screen .info-pop::before{content:"";position:absolute;top:-4px;right:24px;width:8px;height:8px;border-radius:1px;background:inherit;transform:rotate(45deg)}
+#characteristics-screen .info-title[data-info-side="above"] .info-pop{top:auto;bottom:calc(100% + 10px)}
+#characteristics-screen .info-title[data-info-side="above"] .info-pop::before{top:auto;bottom:-4px}
+@media(prefers-reduced-motion:reduce){#characteristics-screen .info-btn::before{transition:none}}
+#characteristics-screen .characteristic-result-card{--result-inset:20px;background:var(--card);border:0;border-radius:22px;padding:16px var(--result-inset) 23px;box-shadow:none}
+#characteristics-screen .art-stage{position:relative;isolation:isolate;padding:0;background:transparent;overflow:visible}
+#characteristics-screen .art-stage svg{display:block;width:100%;height:auto;aspect-ratio:360/420}
+#characteristics-screen .art-stage.total-auc,#characteristics-screen .art-stage.morning-activation,#characteristics-screen .art-stage.evening-fraction{padding-top:16px}
+#characteristics-screen .art-stage.evening-level{padding:13px 0 6px}
+#characteristics-screen .art-stage.evening-level svg{aspect-ratio:360/282}
+#characteristics-screen .art-stage text{font-family:var(--font-ui);font-size:10px;fill:#66536c}
+#characteristics-screen .auc-art{position:relative;width:100%;aspect-ratio:360/420}
+#characteristics-screen .auc-layer{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+#characteristics-screen .reading-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;gap:14px;margin:0}
+#characteristics-screen .reading-value{font-family:var(--font-numeric);font-size:46px;line-height:1;letter-spacing:-.06em;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px;min-width:0}
+#characteristics-screen .reading-unit{font-family:var(--font-mono);font-weight:400;font-size:11px;letter-spacing:0;line-height:1.4;max-width:105px;color:var(--reference-label)}
+#characteristics-screen .reference-value{text-align:right;font-size:16px;color:var(--reference-value);line-height:1.4;white-space:nowrap}
+#characteristics-screen .reference-value span{display:block}
+#characteristics-screen .reference-value span:first-child{font-size:10px;color:var(--reference-label);margin-bottom:5px}
+#characteristics-screen .reference-value .reference-caption{font-family:var(--font-mono);font-weight:400;text-transform:uppercase;letter-spacing:.075em;line-height:1.5;margin-top:0}
+/* Space between artwork and interpretation. */
+#characteristics-screen .meaning{position:relative;margin:8px calc(-1 * var(--result-inset)) 0;padding:20px var(--result-inset) 0;border-top:0}
+#characteristics-screen .meaning .caption{font-size:10px;margin:0 0 12px;color:#66536c}
+#characteristics-screen .meaning p:not(.caption){margin:0;font-size:15px;line-height:1.7;color:#514256}
+#characteristics-screen .closing-note{border-top:1px solid var(--line);padding:25px 0 0}
+#characteristics-screen .closing-note p{font-size:12px;line-height:1.75;color:#6b5f70;margin:0}
+.characteristics-preview label{display:block;margin:12px 0 6px}
+.characteristics-preview select{font:inherit;width:100%;padding:10px 12px;border:1px solid #e2d6e3;border-radius:8px;background:#fff;color:#58465f}
+.characteristics-preview select:focus-visible{outline:2px solid #8c6dae;outline-offset:4px}
+@media(max-width:480px){#characteristics-screen .description,#characteristics-screen .meaning p:not(.caption){font-size:14px}#characteristics-screen .reading-value{font-size:43px}}
+@media(max-width:350px){#characteristics-screen>h1{font-size:28px}#characteristics-screen h2{font-size:22.4px}#characteristics-screen .characteristic-result-card{--result-inset:16px;padding:13px var(--result-inset) 20px;border-radius:20px}#characteristics-screen .reading-value{font-size:39px;gap:7px}#characteristics-screen .reading-unit{font-size:10px;max-width:74px}#characteristics-screen .reference-value{font-size:14px}}
+@media print{#characteristics-screen .characteristic{break-inside:avoid}#characteristics-screen .characteristic-result-card{box-shadow:none;border:0}}

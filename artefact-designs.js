@@ -97,13 +97,13 @@
     const variant = variants.find(v => v.key === (options.variant || data.archetype)) || variants[0];
     const meter = options.treatment === 'meter';
     const hasFigure = Number.isFinite(options.figurePercent) && options.figurePercent >= 0 && options.figurePercent <= 100;
-    const comparison = hasFigure ? {label:'',value:n(options.figurePercent)+'%'} : {label:'Better rhythm than',value:'99.2% of people'};
+    const comparison = hasFigure ? {label:'Better rhythm than',value:n(options.figurePercent)+'% of people'} : {label:'Better rhythm than',value:'99.2% of people'};
     const id = 'trace-' + variant.key + (meter ? '-meter' : '');
     const background = options.backgroundData || `assets/artefacts/cinema/${variant.key}-paper.png`;
     const date = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC' }).format(new Date(data.date + 'T00:00:00Z'));
     return `<svg xmlns="http://www.w3.org/2000/svg" width="1086" height="1448" viewBox="0 0 1086 1448" role="img" aria-labelledby="${id}-title ${id}-desc" data-archetype="${variant.key}" data-treatment="${meter ? 'meter' : 'rhythm'}" data-report-date="${escape(data.date)}" data-detail-scale="1.2">
   <title id="${id}-title">${escape(variant.title)} — Trace</title>
-  <desc id="${id}-desc">${escape(variant.caption)} ${escape(date)}. Rhythm score ${escape(data.rhythmDisplay)} out of 100 from the illustrative report model. ${hasFigure ? 'Share graphic value '+escape(comparison.value)+', supplied independently of the rhythm score.' : 'Percentile copy is a fixed design placeholder, not a calculated population comparison.'} The Cortisol Gods approve. Playful editorial approval and playful director credit, not a medical classification. Transparent story overlay.</desc>
+  <desc id="${id}-desc">${escape(variant.caption)} ${escape(date)}. Rhythm score ${escape(data.rhythmDisplay)} out of 100 from the illustrative report model. ${hasFigure ? 'Population comparison copy supplied by the report publisher, independently of the calculated rhythm score.' : 'Percentile copy is a fixed design placeholder, not a calculated population comparison.'} The Cortisol Gods approve. Playful editorial approval and playful director credit, not a medical classification. Transparent story overlay.</desc>
   <defs><style>${options.fontStyle || ''}
     text{font-synthesis:none}
     .type{font-family:'GT Alpina Typewriter',monospace;font-weight:400}
